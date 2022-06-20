@@ -15,7 +15,7 @@ contract FundMe{
         return uint(price*1e10);
     }
     function getConverstion(uint amount) public view returns(uint) {
-        uint price=getPrice();
+        uint price=getPrice() ;
         uint priceUsd=(price*amount)/1e18;
         return priceUsd;
     }

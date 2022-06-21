@@ -7,9 +7,14 @@ contract FundMe{
     using PriceConverter for uint;
     address[] funders;
     mapping(address=>uint) public addressAmount; 
-    uint public minimumValue=2*1e18;
+    uint public constant minimumValue=2*1e18;
+    error notEnough();
+
     function Fund() public payable{
-        require(msg.value.getConverstion() >minimumValue,"Please send more big value");
+        // require(msg.value.getConverstion() >=minimumValue,"Please send more big value");
+        if(msg.value.getConverstion()<minimumValue){
+            revert notEnough();
+        }
         funders.push(msg.sender);
         addressAmount[msg.sender]=msg.value;
     }
